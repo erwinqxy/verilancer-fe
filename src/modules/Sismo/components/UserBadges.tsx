@@ -46,7 +46,14 @@ function UserBadges({ user }: IProps) {
           <h2
             className='mb-6 pb-4 border-b border-gray-gray-200 text-gray-900 font-medium break-all mt-4'
             style={{ fontFamily: 'customFont' }}>
-            All zkPOW badges:
+            <p
+              className='text-5xl font-medium tracking-wider mb-8'
+              style={{ fontFamily: 'CustomFont' }}>
+              PROOF OF{' '}
+              <span className='text-red-600' style={{ fontFamily: 'CustomFont' }}>
+                WORK
+              </span>
+            </p>
           </h2>
           <div
             className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4'

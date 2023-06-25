@@ -56,14 +56,14 @@ function UserDetail({ user }: { user: IUser }) {
             <div className='flex items-center justify-start mb-4'>
               <Image
                 src={`/images/default-avatar-${Number(user?.id ? user.id : '1') % 11}.jpeg`}
-                className='w-10 mr-4 rounded-full'
-                width={50}
-                height={50}
+                className='w-50 mr-4 rounded-full'
+                width={100}
+                height={100}
                 alt='default avatar'
               />
               <div className='flex flex-col'>
-                <p className='text-gray-900 font-medium break-all'>{user?.handle}</p>
-                <p className='text-gray-900 text-xs'>{userDescription?.title}</p>
+                <p className='text-gray-900 font-xl break-all'>{user?.handle}</p>
+                <p className='text-gray-900 text-xl'>{userDescription?.title}</p>
               </div>
               <div className=''>
                 <PohModule address={user.address} />
@@ -74,19 +74,10 @@ function UserDetail({ user }: { user: IUser }) {
         </div>
         <div className=' border-t border-gray-100 pt-4 w-full'>
           {userDescription?.name && (
-            <p className='text-sm text-gray-500 mt-4'>
+            <p className='text-xl text-gray-500 mt-4'>
               <strong>Name:</strong> {userDescription?.name}
             </p>
           )}
-          <p className='text-sm text-gray-500 mt-4'>
-            <strong>Skills:</strong> {userDescription?.skills_raw}
-          </p>
-          <p className='text-sm text-gray-500 mt-4'>
-            <strong>About:</strong> {userDescription?.about}
-          </p>
-          <p className='text-sm text-gray-500 mt-4'>
-            <strong>Work Experience:</strong> {/* PLACEHOLDER */}
-          </p>
           {userDescription?.role && (
             <p className='text-sm text-gray-500 mt-4'>
               <strong>Role:</strong> {userDescription?.role}
