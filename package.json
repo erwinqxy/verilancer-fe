@@ -28,6 +28,7 @@
     "react-dom": "^18.2.0",
     "react-github-login-button": "^1.0.1",
     "react-router-dom": "^6.4.2",
+    "react-tippy": "^1.4.0",
     "react-toastify": "^9.1.1",
     "wagmi": "^0.8.5",
     "yup": "^0.32.11"
