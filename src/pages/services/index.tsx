@@ -4,6 +4,7 @@ import Loading from '../../components/Loading';
 import ServiceItem from '../../components/ServiceItem';
 import useServices from '../../hooks/useServices';
 import { IService, ServiceStatusEnum } from '../../types';
+import SearchBounties from '../../components/Form/SearchBounties';
 
 function Services() {
   const PAGE_SIZE = 30;
@@ -40,7 +41,7 @@ function Services() {
       <div
         className='flex justify-center items-center gap-10 flex-col pb-5'
         style={{ fontFamily: 'customFont' }}>
-        <SearchServiceButton value={searchQuery} />
+        <SearchBounties value={searchQuery} />
       </div>
 
       <div

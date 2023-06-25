@@ -17,6 +17,7 @@ import { sismo } from '../config';
 import { contractAddress, abi } from '../constants/smartcontractinfo';
 import { useSigner } from 'wagmi';
 import { ethers } from 'ethers';
+import UserOAuth from './UserOAuth';
 
 
 function UserDetail({ user }: { user: IUser }) {
@@ -47,6 +48,8 @@ function UserDetail({ user }: { user: IUser }) {
 
   return (
     <div>
+      <UserOAuth />
+      <br></br>
       <div className='flex flex-col rounded-xl p-4 border border-gray-200'>
         <div className='flex items-top justify-between w-full'>
           <div className='flex flex-col justify-start items-start gap-4'>
@@ -82,7 +85,7 @@ function UserDetail({ user }: { user: IUser }) {
             <strong>About:</strong> {userDescription?.about}
           </p>
           <p className='text-sm text-gray-500 mt-4'>
-            <strong>Work Experience:</strong> { /* PLACEHOLDER */}
+            <strong>Work Experience:</strong> {/* PLACEHOLDER */}
           </p>
           {userDescription?.role && (
             <p className='text-sm text-gray-500 mt-4'>
@@ -93,25 +96,24 @@ function UserDetail({ user }: { user: IUser }) {
 
         {currentUser?.id === user.id && (
           <div className=' border-t border-gray-100 pt-4 w-full mt-4'>
-            <SismoConnectButton
-              config={sismo}
-              // request proof of Github ownership
-              auths={[{ authType: AuthType.VAULT }, { authType: AuthType.GITHUB }]}
-              claims={[{ groupId: '0xfb20933ed4261d329255c10c64c53ff0' }]}
-              onResponse={async (response: SismoConnectResponse) => {
-                console.log(response);
-              }}
-              onResponseBytes={(response: string) => {
-                // TODO: Store this response in the smart contract
+            <div>
+              {' '}
+              <SismoConnectButton
+                config={sismo}
+                // request proof of Github ownership
+                auths={[{ authType: AuthType.VAULT }, { authType: AuthType.GITHUB }]}
+                claims={[{ groupId: '0xfb20933ed4261d329255c10c64c53ff0' }]}
+                onResponse={async (response: SismoConnectResponse) => {
+                  console.log(response);
+                }}
+                onResponseBytes={(response: string) => {
+                  console.log('Response:');
+                  console.log(response); // call your contract with the response as bytes
+                  checkSismo(response);
+                }}
+              />
+            </div>
 
-
-                console.log("Response:")
-                console.log(response); // call your contract with the response as bytes
-
-
-                checkSismo(response);
-              }}
-            />
             <br></br>
             <div className='flex flex-row gap-4 justify-end items-center'>
               <Link
