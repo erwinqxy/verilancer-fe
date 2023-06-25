@@ -13,7 +13,7 @@ function Dashboard() {
 
   return (
     <div className='max-w-7xl mx-auto text-gray-900 sm:px-4 lg:px-0'>
-      {user  == null ? (
+      {user == null ? (
         <p
           className='text-5xl font-medium tracking-wider mb-8'
           style={{ fontFamily: 'CustomFont' }}>
@@ -36,7 +36,7 @@ function Dashboard() {
 
       {account?.isConnected && user && (
         <div>
-          <div className='mb-6'>
+          <div className='mb-6' style={{ fontFamily: 'customFont' }}>
             <h2 className='mb-6 pb-4 border-b border-gray-gray-200 text-gray-900 font-medium break-all'>
               Your profile
             </h2>

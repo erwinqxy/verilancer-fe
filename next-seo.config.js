@@ -10,7 +10,7 @@ export default {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    site_name: 'TL indie',
+    site_name: 'V-lancer',
     title,
     description,
     images: [

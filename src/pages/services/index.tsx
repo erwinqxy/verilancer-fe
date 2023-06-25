@@ -37,11 +37,15 @@ function Services() {
         </p>
       )}
 
-      <div className='flex justify-center items-center gap-10 flex-col pb-5'>
+      <div
+        className='flex justify-center items-center gap-10 flex-col pb-5'
+        style={{ fontFamily: 'customFont' }}>
         <SearchServiceButton value={searchQuery} />
       </div>
 
-      <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4'>
+      <div
+        className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4'
+        style={{ fontFamily: 'customFont' }}>
         {services.map((service: IService, i: number) => {
           return <ServiceItem service={service} key={i} />;
         })}
@@ -54,6 +58,7 @@ function Services() {
             className={`px-5 py-2 mt-5 content-center border border-indigo-600 rounded-full text-indigo-600 
               hover:text-white hover:bg-indigo-700
             `}
+            style={{ fontFamily: 'customFont' }}
             disabled={!hasMoreData}
             onClick={() => loadMore()}>
             Load More
@@ -61,12 +66,16 @@ function Services() {
         </div>
       )}
       {loading && (
-        <div className='flex justify-center items-center gap-10 flex-col pb-5 mt-5'>
+        <div
+          className='flex justify-center items-center gap-10 flex-col pb-5 mt-5'
+          style={{ fontFamily: 'customFont' }}>
           <Loading />
         </div>
       )}
       {!hasMoreData && !loading && (
-        <div className='flex justify-center items-center gap-10 flex-col pb-5 mt-5'>
+        <div
+          className='flex justify-center items-center gap-10 flex-col pb-5 mt-5'
+          style={{ fontFamily: 'customFont' }}>
           <p>No more Services...</p>
         </div>
       )}
