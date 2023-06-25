@@ -17,7 +17,7 @@ import { sismo } from '../config';
 import { contractAddress, abi } from '../constants/smartcontractinfo';
 import { useSigner } from 'wagmi';
 import { ethers } from 'ethers';
-import UserOAuth from './UserOAuth';
+// import UserOAuth from './UserOAuth';
 
 
 function UserDetail({ user }: { user: IUser }) {
@@ -86,8 +86,6 @@ function UserDetail({ user }: { user: IUser }) {
 
   return (
     <div>
-      <UserOAuth />
-      <br></br>
       <div className='flex flex-col rounded-xl p-4 border border-gray-200'>
         <div className='flex items-top justify-between w-full'>
           <div className='flex flex-col justify-start items-start gap-4'>

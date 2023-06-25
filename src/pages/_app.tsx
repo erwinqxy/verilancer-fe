@@ -16,7 +16,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Layout from './Layout';
 import { useEffect } from 'react';
 import { SessionProvider } from 'next-auth/react';
-import UserOAuth from '../components/UserOAuth';
 import MetamaskButton from '../components/MetamaskButton';
 
 const chains: Chain[] = [customChains.polygonMumbai];
