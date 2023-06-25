@@ -97,7 +97,7 @@ function Layout({ children, className }: ContainerProps) {
               <Bars3BottomLeftIcon className='h-6 w-6' aria-hidden='true' />
             </button>
             <div className='flex flex-1'></div>
-            <MetamaskButton className="h-10 w-10 p-2" /> 
+            {/* <MetamaskButton className="h-10 w-10 p-2" />  */}
             <NetworkSwitch />
             <UserAccount />
           </div>
