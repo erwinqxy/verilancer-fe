@@ -3,6 +3,7 @@ import SearchTalentButton from '../components/Form/SearchTalentButton';
 import Loading from '../components/Loading';
 import UserItem from '../components/UserItem';
 import useUsers from '../hooks/useUsers';
+import FindTalentButton from '../components/Form/FindTalentButton';
 
 function Talents() {
   const PAGE_SIZE = 36;
@@ -34,7 +35,7 @@ function Talents() {
       )}
 
       <div className='flex justify-center items-center gap-10 flex-col pb-5'>
-        <SearchTalentButton value={searchQuery} />
+        <FindTalentButton value={searchQuery} />
       </div>
 
       <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-4'>

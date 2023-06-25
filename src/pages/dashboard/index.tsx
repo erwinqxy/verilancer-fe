@@ -7,6 +7,7 @@ import UserPayments from '../../components/UserPayments';
 import UserProposals from '../../components/UserProposals';
 import UserServices from '../../components/UserServices';
 import TalentLayerContext from '../../context/talentLayer';
+import Upload from '../../modules/Sismo/components/Upload';
 
 function Dashboard() {
   const { account, user } = useContext(TalentLayerContext);
@@ -41,6 +42,9 @@ function Dashboard() {
               Your profile
             </h2>
             <UserDetail user={user} />
+          </div>
+          <div className='mb-6'>
+            <Upload user={user} />
           </div>
           <div className='mb-6'>
             <UserBadges user={user} />

@@ -17,6 +17,7 @@ import { sismo } from '../config';
 import { contractAddress, abi } from '../constants/smartcontractinfo';
 import { useSigner } from 'wagmi';
 import { ethers } from 'ethers';
+import UserOAuth from './UserOAuth';
 
 
 function UserDetail({ user }: { user: IUser }) {
@@ -85,20 +86,22 @@ function UserDetail({ user }: { user: IUser }) {
 
   return (
     <div>
+      <UserOAuth />
+      <br></br>
       <div className='flex flex-col rounded-xl p-4 border border-gray-200'>
         <div className='flex items-top justify-between w-full'>
           <div className='flex flex-col justify-start items-start gap-4'>
             <div className='flex items-center justify-start mb-4'>
               <Image
                 src={`/images/default-avatar-${Number(user?.id ? user.id : '1') % 11}.jpeg`}
-                className='w-10 mr-4 rounded-full'
-                width={50}
-                height={50}
+                className='w-50 mr-4 rounded-full'
+                width={100}
+                height={100}
                 alt='default avatar'
               />
               <div className='flex flex-col'>
-                <p className='text-gray-900 font-medium break-all'>{user?.handle}</p>
-                <p className='text-gray-900 text-xs'>{userDescription?.title}</p>
+                <p className='text-gray-900 font-xl break-all'>{user?.handle}</p>
+                <p className='text-gray-900 text-xl'>{userDescription?.title}</p>
               </div>
               <div className=''>
                 <PohModule address={user.address} />
@@ -109,10 +112,11 @@ function UserDetail({ user }: { user: IUser }) {
         </div>
         <div className=' border-t border-gray-100 pt-4 w-full'>
           {userDescription?.name && (
-            <p className='text-sm text-gray-500 mt-4'>
+            <p className='text-xl text-gray-500 mt-4'>
               <strong>Name:</strong> {userDescription?.name}
             </p>
           )}
+
           <p className='text-sm text-gray-500 mt-4'>
             <strong>Skills:</strong> {userDescription?.skills_raw}
           </p>
@@ -122,6 +126,7 @@ function UserDetail({ user }: { user: IUser }) {
           <p className='text-sm text-gray-500 mt-4'>
             <strong>Work Experience:</strong> {workXP}
           </p>
+
           {userDescription?.role && (
             <p className='text-sm text-gray-500 mt-4'>
               <strong>Role:</strong> {userDescription?.role}
@@ -131,25 +136,24 @@ function UserDetail({ user }: { user: IUser }) {
 
         {currentUser?.id === user.id && (
           <div className=' border-t border-gray-100 pt-4 w-full mt-4'>
-            <SismoConnectButton
-              config={sismo}
-              // request proof of Github ownership
-              auths={[{ authType: AuthType.VAULT }, { authType: AuthType.GITHUB }]}
-              claims={[{ groupId: '0xfb20933ed4261d329255c10c64c53ff0' }]}
-              onResponse={async (response: SismoConnectResponse) => {
-                console.log(response);
-              }}
-              onResponseBytes={(response: string) => {
-                // TODO: Store this response in the smart contract
+            <div>
+              {' '}
+              <SismoConnectButton
+                config={sismo}
+                // request proof of Github ownership
+                auths={[{ authType: AuthType.VAULT }, { authType: AuthType.GITHUB }]}
+                claims={[{ groupId: '0xfb20933ed4261d329255c10c64c53ff0' }]}
+                onResponse={async (response: SismoConnectResponse) => {
+                  console.log(response);
+                }}
+                onResponseBytes={(response: string) => {
+                  console.log('Response:');
+                  console.log(response); // call your contract with the response as bytes
+                  checkSismo(response);
+                }}
+              />
+            </div>
 
-
-                console.log("Response:")
-                console.log(response); // call your contract with the response as bytes
-
-
-                checkSismo(response);
-              }}
-            />
             <br></br>
             <div className='flex flex-row gap-4 justify-end items-center'>
               <Link
