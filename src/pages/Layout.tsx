@@ -6,6 +6,7 @@ import SideBottom from '../components/Layout/SideBottom';
 import SideMenu from '../components/Layout/SideMenu';
 import NetworkSwitch from '../components/NetworkSwitch';
 import UserAccount from '../components/UserAccount';
+import MetamaskButton from '../components/MetamaskButton';
 
 interface ContainerProps {
   children: ReactNode;
@@ -96,6 +97,7 @@ function Layout({ children, className }: ContainerProps) {
               <Bars3BottomLeftIcon className='h-6 w-6' aria-hidden='true' />
             </button>
             <div className='flex flex-1'></div>
+            <MetamaskButton className="h-10 w-10 p-2" /> 
             <NetworkSwitch />
             <UserAccount />
           </div>
