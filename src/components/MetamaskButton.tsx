@@ -17,19 +17,26 @@ const MetamaskButton: React.FC = () => {
   };
 
   return (
-    <button
-      style={{ backgroundColor: isConnected ? '#d7c1b3' : '', height: '50px', paddingTop: 25 }}
-      className={`flex items-center justify-center px-6 py-2 rounded-full text-sm font-medium text-gray-700 group-hover:text-gray-900 focus:outline-none ml-4 ${
-        isConnected ? '' : 'space-x-2'
-      }`}
-      onClick={connectWallet}>
-      <span className='sr-only'>Open Metamask</span>
-      {isConnected ? (
-        'Connected'
-      ) : (
-        <Image src='/metamask-fox.png' alt='Connect to MetaMask' width={32} height={32} />
-      )}
-    </button>
+    <div style={{ marginTop: '10px' }}>
+      <button
+        style={{
+          backgroundColor: isConnected ? '#d7c1b3' : '',
+          height: '20px',
+          paddingTop: 25,
+          borderRadius: '10px',
+        }}
+        className={`flex items-center justify-center px-6 py-5 rounded text-sm font-medium text-gray-700 group-hover:text-gray-900 focus:outline-none ${
+          isConnected ? '' : "'space-x-2'"
+        }`}
+        onClick={connectWallet}>
+        <span className='sr-only'>Open Metamask</span>
+        {isConnected ? (
+          'Connected'
+        ) : (
+          <Image src='/metamask-fox.png' alt='Connect to MetaMask' width={32} height={32} />
+        )}
+      </button>
+    </div>
   );
 };
 
