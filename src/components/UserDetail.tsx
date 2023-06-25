@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import TalentLayerContext from '../context/talentLayer';
 import useUserById from '../hooks/useUserById';
 import PohModule from '../modules/Poh/PohModule';
@@ -22,6 +22,7 @@ import { ethers } from 'ethers';
 function UserDetail({ user }: { user: IUser }) {
   const { user: currentUser } = useContext(TalentLayerContext);
   const userDescription = user?.id ? useUserById(user?.id)?.description : null;
+  const [workXP, setWorkXP] = useState<string>();
 
   if (!user?.id) {
     return <Loading />;
@@ -44,6 +45,43 @@ function UserDetail({ user }: { user: IUser }) {
 
     }
   }
+
+  if (user && signer) {
+    console.log("user", user.address)
+  }
+
+  const getWorkExperience = async () => {
+    if (signer) {
+
+      const contract = new ethers.Contract(
+        contractAddress,
+        abi,
+        signer,
+      );
+
+      const tx = await contract.getWorkExperience(user.address)
+      console.log("transaction:  ", tx)
+
+      return tx;
+
+    }
+  }
+
+
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        console.log("getting work experience....")
+        setWorkXP(await getWorkExperience());
+
+        console.log(workXP);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    fetchData();
+  }, []);
 
   return (
     <div>
@@ -82,7 +120,7 @@ function UserDetail({ user }: { user: IUser }) {
             <strong>About:</strong> {userDescription?.about}
           </p>
           <p className='text-sm text-gray-500 mt-4'>
-            <strong>Work Experience:</strong> { /* PLACEHOLDER */}
+            <strong>Work Experience:</strong> {workXP}
           </p>
           {userDescription?.role && (
             <p className='text-sm text-gray-500 mt-4'>
