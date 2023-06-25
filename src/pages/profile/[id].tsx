@@ -21,20 +21,22 @@ function Profile() {
       <Back />
       {user && (
         <>
-          <p className='text-5xl font-medium tracking-wider mb-8'>
-            Profile <span className='text-indigo-600'>{user.handle}</span>
+          <p
+            className='text-5xl font-medium tracking-wider mb-8'
+            style={{ fontFamily: 'customFont' }}>
+            PROFILE <span className='text-indigo-600'>{user.handle}</span>
           </p>
           <div>
-            <div className='mb-6'>
+            <div className='mb-6' style={{ fontFamily: 'customFont' }}>
               <UserDetail user={user} />
             </div>
-            <div className='mb-6'>
+            <div className='mb-6' style={{ fontFamily: 'customFont' }}>
               <UserBadges user={user} />
             </div>
-            <div className='mb-6'>
+            <div className='mb-6' style={{ fontFamily: 'customFont' }}>
               <UserServices user={user} type='buyer' />
             </div>
-            <div className='mb-6'>
+            <div className='mb-6' style={{ fontFamily: 'customFont' }}>
               <UserServices user={user} type='seller' />
             </div>
             <div className='mb-6'>
