@@ -15,6 +15,7 @@ import SubmitButton from './SubmitButton';
 import useUserById from '../../hooks/useUserById';
 import { SkillsInput } from './skills-input';
 import { delegateUpdateProfileData } from '../request';
+import { abi, contractAddress } from '../../constants/smartcontractinfo';
 
 interface IFormValues {
   title?: string;
@@ -27,7 +28,7 @@ interface IFormValues {
 const validationSchema = Yup.object({
   title: Yup.string().required('title is required'),
   company: Yup.string().required('company is required'),
-  startDate: Yup.string().required('start date is required'),
+  // startDate: Yup.string().required('start date is required'),
 });
 
 function WorkExperienceForm({ callback }: { callback?: () => void }) {
@@ -44,6 +45,38 @@ function WorkExperienceForm({ callback }: { callback?: () => void }) {
     return <Loading />;
   }
 
+  const storeWorkExpereince = async (values: IFormValues) => {
+    console.log("storing work experience....")
+    if (user && provider && signer) {
+      console.log("Values to sotre:", values)
+      try {
+
+        const contract = new ethers.Contract(
+          contractAddress,
+          abi,
+          signer,
+        );
+
+        const str = `${values.title}, ${values.company}, ${values.startDate}, ${values.endDate}, ${values.description}`;
+
+        const tx = await contract.addWorkExperience(str);
+        console.log("transaction", tx)
+
+        // Optional: Wait for transaction to be validated
+        await tx.wait();
+
+        if (callback) {
+          callback();
+        }
+      } catch (error) {
+        showErrorTransactionToast(error);
+      }
+    } else {
+      openConnectModal();
+    }
+
+  }
+
   const initialValues: IFormValues = {
     title: userDescription?.title || '',
     company: userDescription?.role || '',
@@ -57,33 +90,11 @@ function WorkExperienceForm({ callback }: { callback?: () => void }) {
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void; resetForm: () => void },
   ) => {
     if (user && provider && signer) {
-      try {
-        const schemaRegistryContractAddress = "0x340a861431d6f541b12b060f543BA64EBc559354";
-        const schemaRegistry = new SchemaRegistry(schemaRegistryContractAddress);
 
-        schemaRegistry.connect(signer);
+      //store this in vlance's smart contract
+      storeWorkExpereince(values);
 
-        const schema = "uint16 voteIndex";
-        const resolverAddress = "0x0a7E2Ff54e76B8E6659aedc9103FB21c038050D0"; // Sepolia 0.26
-        const revocable = true;
 
-        const transaction = await schemaRegistry.register({
-          schema,
-          resolverAddress,
-          revocable,
-        });
-
-        // Optional: Wait for transaction to be validated
-        await transaction.wait();
-
-        if (callback) {
-          callback();
-        }
-
-        setSubmitting(false);
-      } catch (error) {
-        showErrorTransactionToast(error);
-      }
     } else {
       openConnectModal();
     }
