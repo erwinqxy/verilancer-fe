@@ -18,12 +18,15 @@ import { contractAddress, abi } from '../constants/smartcontractinfo';
 import { useSigner } from 'wagmi';
 import { ethers } from 'ethers';
 // import UserOAuth from './UserOAuth';
-
+import { ApolloQueryResult, gql } from '@apollo/client';
+import client from '../api/apollo';
 
 function UserDetail({ user }: { user: IUser }) {
   const { user: currentUser } = useContext(TalentLayerContext);
   const userDescription = user?.id ? useUserById(user?.id)?.description : null;
   const [workXP, setWorkXP] = useState<string>();
+  const [graphData, setGraphData] = useState<ApolloQueryResult<any>>();
+  const [isVerified, setIsVerified] = useState<boolean>(false);
 
   if (!user?.id) {
     return <Loading />;
@@ -34,46 +37,36 @@ function UserDetail({ user }: { user: IUser }) {
 
   const checkSismo = async (sismoResponse: string) => {
     if (signer) {
+      const contract = new ethers.Contract(contractAddress, abi, signer);
 
-      const contract = new ethers.Contract(
-        contractAddress,
-        abi,
-        signer,
-      );
-
-      const tx = await contract.checkSismoGithub(sismoResponse)
-      console.log("transaction", tx)
-
+      const tx = await contract.checkSismoGithub(sismoResponse);
+      console.log('transaction', tx);
+      // const uniqueContributors = filterUniqueContributors(graphData?.data);
+      console.log('Unique contributors:', graphData?.data.verifiedGithubContributors);
+      //TODO: VERFIY THE DATA FROM GRAPH DATA
+      setIsVerified(true);
     }
-  }
+  };
 
   if (user && signer) {
-    console.log("user", user.address)
+    // console.log('user', user.address);
   }
 
   const getWorkExperience = async () => {
     if (signer) {
+      const contract = new ethers.Contract(contractAddress, abi, signer);
 
-      const contract = new ethers.Contract(
-        contractAddress,
-        abi,
-        signer,
-      );
-
-      const tx = await contract.getWorkExperience(user.address)
-      console.log("transaction:  ", tx)
+      const tx = await contract.getWorkExperience(user.address);
+      console.log('transaction:  ', tx);
 
       return tx;
-
     }
-  }
-
-
+  };
 
   useEffect(() => {
     async function fetchData() {
       try {
-        console.log("getting work experience....")
+        console.log('getting work experience....');
         setWorkXP(await getWorkExperience());
 
         console.log(workXP);
@@ -84,8 +77,29 @@ function UserDetail({ user }: { user: IUser }) {
     fetchData();
   }, []);
 
+  client
+    .query({
+      query: gql(`query {
+      verifiedGithubContributors {
+        id
+        contributor
+        blockNumber
+        blockTimestamp
+      }
+    }`),
+      variables: {
+        orderBy: 'createdAtTimestamp',
+        orderDirection: 'desc',
+      },
+    })
+    .then(data => setGraphData(data))
+    .catch(err => {
+      console.log('Error fetching data: ', err);
+    });
+
   return (
     <div>
+      {/* <UserOAuth /> */}
       <div className='flex flex-col rounded-xl p-4 border border-gray-200'>
         <div className='flex items-top justify-between w-full'>
           <div className='flex flex-col justify-start items-start gap-4'>
@@ -99,6 +113,7 @@ function UserDetail({ user }: { user: IUser }) {
               />
               <div className='flex flex-col'>
                 <p className='text-gray-900 font-xl break-all'>{user?.handle}</p>
+                {isVerified ? <img src='/icon.png' alt='Logo' className='w-11 h-11 mr-2' /> : null}
                 <p className='text-gray-900 text-xl'>{userDescription?.title}</p>
               </div>
               <div className=''>

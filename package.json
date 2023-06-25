@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@apollo/client": "^3.7.16",
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
     "@enzoferey/ethers-error-parser": "^0.2.2",
@@ -22,6 +23,7 @@
     "axios": "^1.1.3",
     "ethers": "^5.7.2",
     "formik": "^2.2.9",
+    "graphql": "^16.7.1",
     "heroicons-react": "^1.4.1",
     "ipfs-http-client": "^59.0.0",
     "next": "^13.3.4",
