@@ -9,7 +9,7 @@ const MetamaskButton: React.FC = () => {
     try {
       const MMSDK = new MetaMaskSDK(); // add your options here
       const ethereum = MMSDK.getProvider();
-      await ethereum.request({ method: 'eth_requestAccounts', params: [] });
+      await ethereum?.request({ method: 'eth_requestAccounts', params: [] });
       setConnected(true);
     } catch (error) {
       console.error('Failed to connect to MetaMask', error);
