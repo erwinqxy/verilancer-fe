@@ -43,6 +43,7 @@ function SearchTalentButton(props?: { value?: string }) {
           <input
             className='text-gray-500 py-2 focus:ring-0 outline-none text-sm sm:text-lg border-0'
             type='text'
+            style={{ fontFamily: 'customFont' }}
             placeholder='Search by skills'
             onChange={e => setSearchQuery(e.target.value)}
             value={searchQuery}
