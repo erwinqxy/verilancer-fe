@@ -16,7 +16,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Layout from './Layout';
 import { useEffect } from 'react';
 import { SessionProvider } from 'next-auth/react';
-import UserOAuth from '../components/UserOAuth';
 
 const chains: Chain[] = [customChains.polygonMumbai];
 
@@ -53,7 +52,6 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
             <MessagingProvider>
               <ThemeProvider enableSystem={false}>
                 <Layout>
-                  <UserOAuth />
                   <Component {...pageProps} />
                 </Layout>
               </ThemeProvider>
