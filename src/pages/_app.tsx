@@ -17,6 +17,7 @@ import Layout from './Layout';
 import { useEffect } from 'react';
 import { SessionProvider } from 'next-auth/react';
 import UserOAuth from '../components/UserOAuth';
+import MetamaskButton from '../components/MetamaskButton';
 
 const chains: Chain[] = [customChains.polygonMumbai];
 
@@ -54,6 +55,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
               <ThemeProvider enableSystem={false}>
                 <Layout>
                   <UserOAuth />
+                  <MetamaskButton />
                   <Component {...pageProps} />
                 </Layout>
               </ThemeProvider>
@@ -61,6 +63,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
           </XmtpContextProvider>
         </TalentLayerProvider>
         {/* Comment out Wallect Connect Button - KIV if we still want use this */}
+        
         <Web3Modal
           projectId={`${process.env.NEXT_PUBLIC_WALLECT_CONNECT_PROJECT_ID}`}
           ethereumClient={ethereumClient}
