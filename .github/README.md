@@ -1,5 +1,5 @@
 # V-Lance - A Freelancer Passport
-Vercel link: https://verilancer-fe.vercel.app/
+Vercel link: https://verilancer-vl.vercel.app/ 
 <img width="2021" alt="Screenshot 2023-06-26 at 5 05 57 PM" src="https://github.com/erwinqxy/verilancer-fe/assets/72030222/d7773865-770a-4db4-b6cc-fba543de84af">
 
 
