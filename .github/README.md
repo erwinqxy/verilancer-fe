@@ -25,8 +25,11 @@ Ethereum Attestation service is used to add credibility to freelancers' claims a
 
 All these together help freelancers build their credibility on chain.
 
-Note: The smart contract supporting Vlance is here: https://github.com/alinobrasil/vlance_contracts
+Note: 
+- The smart contract supporting Vlance is here: https://github.com/alinobrasil/vlance_contracts
+- The subgraph supporting Vlance is here: https://github.com/NamdarS/vlance_subgraph
 
+  
 ## Pitch Deck 
 <img width="1526" alt="Screenshot 2023-06-26 at 5 02 50 PM" src="https://github.com/erwinqxy/verilancer-fe/assets/72030222/eb1211d2-ed61-4b3f-98df-341689bc1bb4">
 <img width="1524" alt="Screenshot 2023-06-26 at 5 02 55 PM" src="https://github.com/erwinqxy/verilancer-fe/assets/72030222/c8960790-aa83-42ae-aaa3-26981e8c5867">
